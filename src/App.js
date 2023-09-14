@@ -1,35 +1,24 @@
 import React, { useRef } from 'react';
 import { Amplify, Storage } from 'aws-amplify';
 import awsconfig from './aws-exports';
-import Amplify from 'aws-amplify';
-Amplify.configure(awsconfig);
-
 import Axios from 'axios';
 import { nanoid } from 'nanoid'
 import './App.css';
 
+Amplify.configure(awsconfig);
 function App() {
   const textData = useRef(null);
   const fileData = useRef(null);
   const id = nanoid();
   function handleSubmit(event){
+    debugger
     event.preventDefault()
     const uploadUrl = 'https://wuzjwuf3y5.execute-api.ap-east-1.amazonaws.com/test1';
     const dataUrl = 'https://wuzjwuf3y5.execute-api.ap-east-1.amazonaws.com/test1';
-    const file = fileData.files[0];
+    const file = fileData.current.files[0];
     var fileBlob = URL.createObjectURL(file);
     Storage.put(file.name, fileBlob, {
       contentType: 'image/jpeg' // contentType is optional
-    });
-    Axios.post(uploadUrl, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    }).then(response => {
-      console.log('success', response.data);
-
-    }).catch(error => {
-      console.error('fill', error);
     });
   }
   return (
