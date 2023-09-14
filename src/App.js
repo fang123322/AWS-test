@@ -11,7 +11,6 @@ function App() {
   const fileData = useRef(null);
   const id = nanoid();
   function handleSubmit(event){
-    debugger
     event.preventDefault()
     const uploadUrl = 'https://wuzjwuf3y5.execute-api.ap-east-1.amazonaws.com/test1';
     const dataUrl = 'https://wuzjwuf3y5.execute-api.ap-east-1.amazonaws.com/test1';
