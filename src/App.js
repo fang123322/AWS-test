@@ -1,11 +1,36 @@
 import React, { useRef } from 'react';
 import { Amplify, Storage } from 'aws-amplify';
-import awsconfig from './aws-exports';
+// import awsconfig from './aws-exports';
 import Axios from 'axios';
 import { nanoid } from 'nanoid'
 import './App.css';
 
-Amplify.configure(awsconfig);
+Amplify.configure({
+  "aws_project_region": "ap-south-1",
+  "aws_cognito_identity_pool_id": "ap-south-1:2ff0db0f-9198-43c5-ba60-6a3ceb79cabc",
+  "aws_cognito_region": "ap-south-1",
+  "aws_user_pools_id": "ap-south-1_cB5PNKPy6",
+  "aws_user_pools_web_client_id": "7c1ru8q8tsk48o602rrkt5tr95",
+  "oauth": {},
+  "aws_cognito_username_attributes": [],
+  "aws_cognito_social_providers": [],
+  "aws_cognito_signup_attributes": [
+      "EMAIL"
+  ],
+  "aws_cognito_mfa_configuration": "OFF",
+  "aws_cognito_mfa_types": [
+      "SMS"
+  ],
+  "aws_cognito_password_protection_settings": {
+      "passwordPolicyMinLength": 8,
+      "passwordPolicyCharacters": []
+  },
+  "aws_cognito_verification_mechanisms": [
+      "EMAIL"
+  ],
+  "aws_user_files_s3_bucket": "awstest95c587d84abb4a1e82573e0b420cfb4f212549-staging",
+  "aws_user_files_s3_bucket_region": "ap-south-1"
+});
 function App() {
   const textData = useRef(null);
   const fileData = useRef(null);
