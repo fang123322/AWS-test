@@ -32,7 +32,7 @@ const amplifyConfig ={
 };
 Amplify.configure(amplifyConfig);
 
-const gatewayUrl = 'https://uhl1n9glp0.execute-api.ap-south-1.amazonaws.com/default/DynamoDBSaveS3FilePath';
+const gatewayUrl = 'https://sq1xsgjhyh.execute-api.ap-south-1.amazonaws.com/default/DynamoDBSaveS3FilePath';
 
 function App() {
   const inputData = useRef(null);
