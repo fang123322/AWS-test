@@ -1,11 +1,10 @@
 import React, { useRef } from 'react';
 import { Amplify, Storage } from 'aws-amplify';
 // import awsconfig from './aws-exports';
-import Axios from 'axios';
+import axios from 'axios'
 import { nanoid } from 'nanoid'
 import './App.css';
-
-Amplify.configure({
+const amplifyConfig ={
   "aws_project_region": "ap-south-1",
   "aws_cognito_identity_pool_id": "ap-south-1:2ff0db0f-9198-43c5-ba60-6a3ceb79cabc",
   "aws_cognito_region": "ap-south-1",
@@ -30,23 +29,46 @@ Amplify.configure({
   ],
   "aws_user_files_s3_bucket": "awstest95c587d84abb4a1e82573e0b420cfb4f212549-staging",
   "aws_user_files_s3_bucket_region": "ap-south-1"
-});
+};
+Amplify.configure(amplifyConfig);
+
+const gatewayUrl = 'https://uhl1n9glp0.execute-api.ap-south-1.amazonaws.com/default/DynamoDBSaveS3FilePath';
+
 function App() {
-  const textData = useRef(null);
+  const inputData = useRef(null);
   const fileData = useRef(null);
-  const id = nanoid();
+
+
   function handleSubmit(event){
-    debugger
     event.preventDefault()
-    const uploadUrl = 'https://wuzjwuf3y5.execute-api.ap-east-1.amazonaws.com/test1';
-    const dataUrl = 'https://wuzjwuf3y5.execute-api.ap-east-1.amazonaws.com/test1';
     const file = fileData.current.files[0];
     var fileBlob = URL.createObjectURL(file);
     Storage.put(file.name, fileBlob, {
       contentType: file.type , // contentType is optional
       level: 'public'
+    }).then((obj) => {
+      alert('upload success next ....');
+      const id = nanoid();
+      const inputText = inputData.current.value;
+      const filePath = `${amplifyConfig.aws_user_files_s3_bucket}/${obj.key}`;
+      sendDataToGateway({id,inputText,filePath});
     });
   }
+
+  function sendDataToGateway(data){
+    axios({
+      url: gatewayUrl,
+      method: 'OPTIONS',
+      data: data,
+      timeout: 5000,
+      headers: {
+        'Content-Type':'application/json;charset=utf-8',
+      }
+    }).then((data) => {
+      alert(data);
+    });
+  }
+
   return (
     <div className="flex flex-col h-screen bg-green-50 items-center justify-center view-account">
     <div className="md:text-center ">
@@ -54,7 +76,7 @@ function App() {
         <form  className="font-medium" onSubmit={handleSubmit} action="https://wuzjwuf3y5.execute-api.ap-east-1.amazonaws.com/test1" method="post" encType="multipart/form-data" >
           <div>
               <label className="w-full md:w-1/2 ">Text input:</label>
-              <input className="w-full border md:w-1/2 " name="text" ref={textData}></input>
+              <input className="w-full border md:w-1/2 " name="text" ref={inputData}></input>
               <br/>
               <label className="w-full md:w-1/2 ">File input:</label>
               <input className="w-full border md:w-1/2 " type="file" name="file" ref={fileData}></input>
