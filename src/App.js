@@ -32,7 +32,7 @@ const amplifyConfig ={
 };
 Amplify.configure(amplifyConfig);
 
-const gatewayUrl = 'https://sq1xsgjhyh.execute-api.ap-south-1.amazonaws.com/default/DynamoDBSaveS3FilePath';
+const gatewayUrl = 'https://j361ia1tpg.execute-api.ap-south-1.amazonaws.com/test/DynamoDBSaveS3FilePath';
 
 function App() {
   const inputData = useRef(null);
@@ -58,7 +58,7 @@ function App() {
   function sendDataToGateway(data){
     axios({
       url: gatewayUrl,
-      method: 'OPTIONS',
+      method: 'post',
       data: data,
       timeout: 5000,
       headers: {
