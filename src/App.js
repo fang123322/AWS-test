@@ -61,7 +61,7 @@ function App() {
       method: 'post',
       data: data,
       timeout: 5000,
-      withCredentials: false,
+      withCredentials: true,
       headers: {
         'Content-Type':'application/json;charset=utf-8',
       }
