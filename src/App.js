@@ -75,7 +75,7 @@ function App() {
     <div className="flex flex-col h-screen bg-green-50 items-center justify-center view-account">
     <div className="md:text-center ">
       <div className="pt-6 md:p-8 space-y-4">
-        <form  className="font-medium" onSubmit={handleSubmit} action="https://wuzjwuf3y5.execute-api.ap-east-1.amazonaws.com/test1" method="post" encType="multipart/form-data" >
+        <form  className="font-medium" onSubmit={handleSubmit} >
           <div>
               <label className="w-full md:w-1/2 ">Text input:</label>
               <input className="w-full border md:w-1/2 " name="text" ref={inputData}></input>
