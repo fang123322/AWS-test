@@ -47,7 +47,7 @@ function App() {
       contentType: file.type , // contentType is optional
       level: 'public'
     }).then((obj) => {
-      alert('upload success next ....');
+      alert('upload s3 success next ....');
       const id = nanoid();
       const inputText = inputData.current.value;
       const filePath = `${amplifyConfig.aws_user_files_s3_bucket}/${obj.key}`;
@@ -66,7 +66,8 @@ function App() {
         'Content-Type':'application/json;charset=utf-8',
       }
     }).then((data) => {
-      alert(data);
+      console.info(data)
+      alert(`update table data code =  ${data.status}`);
     });
   }
 
