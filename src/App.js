@@ -50,7 +50,7 @@ function App() {
       alert('upload s3 success next ....');
       const id = nanoid();
       const inputText = inputData.current.value;
-      const filePath = `${amplifyConfig.aws_user_files_s3_bucket}/${obj.key}`;
+      const filePath = `${amplifyConfig.aws_user_files_s3_bucket}/public/${obj.key}`;
       sendDataToGateway({id,inputText,filePath});
     });
   }
