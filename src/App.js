@@ -42,8 +42,7 @@ function App() {
   function handleSubmit(event){
     event.preventDefault()
     const file = fileData.current.files[0];
-    var fileBlob = URL.createObjectURL(file);
-    Storage.put(file.name, fileBlob, {
+    Storage.put(file.name, file, {
       contentType: file.type , // contentType is optional
       level: 'public'
     }).then((obj) => {
